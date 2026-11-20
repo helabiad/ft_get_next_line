@@ -6,7 +6,7 @@
 /*   By: helabiad <helabiad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/19 16:55:58 by helabiad          #+#    #+#             */
-/*   Updated: 2026/11/20 14:21:36 by helabiad         ###   ########.fr       */
+/*   Updated: 2026/11/20 14:24:05 by helabiad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	*get_next_line(int fd)
 	line = ft_get_line(&saved[fd], fd);
 	if (line == NULL)
 	{
-		free(saved);
+		free(saved[fd]);
 		saved[fd] = NULL;
 		return (NULL);
 	}
