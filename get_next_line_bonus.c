@@ -6,7 +6,7 @@
 /*   By: helabiad <helabiad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/19 16:55:58 by helabiad          #+#    #+#             */
-/*   Updated: 2026/11/20 14:24:05 by helabiad         ###   ########.fr       */
+/*   Updated: 2026/11/25 10:04:28 by helabiad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@ char	*read_until_line(char *saved, int fd)
 {
 	char	*buffer;
 	char	*tmp;
-	int		read_bytes;
+	ssize_t	read_bytes;
 
-	buffer = malloc (BUFFER_SIZE + 1);
+	buffer = malloc ((size_t)BUFFER_SIZE + 1);
 	if (buffer == NULL)
 		return (NULL);
 	buffer[0] = '\0';
 	read_bytes = 1;
 	while (!ft_strchr(buffer, '\n') && read_bytes != 0)
 	{
-		read_bytes = read(fd, buffer, BUFFER_SIZE);
+		read_bytes = read(fd, buffer, (size_t)BUFFER_SIZE);
 		if (read_bytes == -1)
-			return (free(buffer), NULL);
+			return (free(saved), saved = NULL, free(buffer), NULL);
 		buffer[read_bytes] = '\0';
 		tmp = saved;
 		saved = ft_strjoin(saved, buffer);
@@ -44,8 +44,8 @@ char	*ft_get_line(char **saved, int fd)
 {
 	char	*line;
 	char	*tmp;
-	int		i;
-	int		j;
+	size_t	i;
+	size_t	j;
 
 	tmp = read_until_line(*saved, fd);
 	if (tmp == NULL)
